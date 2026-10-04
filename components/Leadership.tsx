@@ -32,21 +32,21 @@ const leadershipTeam = [
   },
 ];
 
-// 2. Equipo de Project Design & Estimating
+// 2. Equipo de Project Design & Estimating (VERSIÓN CONCISA)
 const designEstimatingTeam = [
   {
     name: "Ivonne Salcedo",
     role: "Estimating & Client Coordination",
-    specialty: "Cost Analysis & Material Takeoffs",
-    bio: "Ivonne develops comprehensive, transparent proposals and estimates tailored to each project's scope. She works closely with clients to guide them through budgeting, material selections, and schedule milestones.",
+    specialty: "Cost Analysis & Proposals",
+    bio: "Prepares detailed, transparent budgets and guides clients through material selection, permitting, and project timelines.",
     image: "/user_female.png",
     icon: Calculator
   },
   {
     name: "Apolonio Salcedo",
     role: "Project Design & Technical Takeoffs",
-    specialty: "Digital Site Layouts & Specifications",
-    bio: "Apolonio translates architectural requirements into actionable field plans. He leverages digital modeling, grade calculations, and automated takeoff workflows to guarantee structural accuracy before breaking ground.",
+    specialty: "Site Layouts & Calculations",
+    bio: "Transforms architectural plans into precise field layouts, material quantities, and excavation models before breaking ground.",
     image: "/apolonio.png",
     icon: Compass
   }
@@ -165,8 +165,9 @@ export default function Leadership() {
             <h4 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Project Design & Estimating
             </h4>
-            <p className="mt-4 max-w-2xl text-base text-slate-400">
-              Clear blueprints and accurate calculations are the foundation of on-time, on-budget delivery. Our dedicated team reviews site layouts, material quantities, and specifications to ensure thorough and reliable estimates.
+            {/* Párrafo descriptivo breve */}
+            <p className="mt-3 max-w-xl text-base text-slate-400">
+              Accurate planning and clear estimates to keep your project on schedule and on budget.
             </p>
           </div>
 
