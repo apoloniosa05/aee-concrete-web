@@ -69,7 +69,7 @@ export default function Footer() {
               <div className="rounded-lg bg-slate-900/50 p-2 transition-colors group-hover:bg-brand/20">
                 <Phone className="shrink-0 text-brand" size={18} />
               </div>
-              <span className="font-medium">(916) 555-0198</span>
+              <span className="font-medium">(916) 340-4542</span>
             </li>
             <li className="group flex items-center gap-4 transition-colors hover:text-slate-200">
               <div className="rounded-lg bg-slate-900/50 p-2 transition-colors group-hover:bg-brand/20">
