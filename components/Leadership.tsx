@@ -2,20 +2,20 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail, Calculator, Compass } from "lucide-react";
 
-// Arreglo actualizado con los 4 integrantes
-const team = [
+// 1. Equipo Directivo Principal
+const leadershipTeam = [
   { 
     name: "Alberto Salcedo", 
     role: "Chief Executive Officer",
-    bio: "With over 16 years of hands-on experience in the construction industry, Alberto leads our corporate vision and strategy with a commitment to unyielding quality, safety, and structural integrity.",
+    bio: "With over 16 years of hands-on experience in the construction industry, Alberto leads corporate vision and strategy with an unyielding commitment to quality, safety, and structural integrity.",
     image: "/user.jpg"
   },
   { 
     name: "Alberto Salcedo Sr.", 
     role: "Field Operations Manager",
-    bio: "Bringing decades of proven mastery in the field, Alberto Sr. supervises on-site heavy machinery operations, excavation grading, and concrete pours to ensure absolute precision on every job.",
+    bio: "Bringing decades of proven mastery in the field, Alberto Sr. supervises on-site heavy machinery operations, grading, and concrete pours to ensure absolute precision on every job.",
     image: "/user.jpg"
   },
   { 
@@ -27,18 +27,61 @@ const team = [
   { 
     name: "Apolonio Salcedo", 
     role: "Director of IT & Operations",
-    bio: "Spearheading our digital transformation, Apolonio optimizes field logistics and organizational efficiency through advanced cloud infrastructure, automated systems, and modern technology.",
+    bio: "Spearheading our digital transformation, Apolonio optimizes field logistics and organizational efficiency through modern cloud infrastructure, automated workflows, and data-driven systems.",
     image: "/apolonio.png"
   },
 ];
 
+// 2. Equipo de Project Design & Estimating
+const designEstimatingTeam = [
+  {
+    name: "Ivonne Salcedo",
+    role: "Estimating & Client Coordination",
+    specialty: "Cost Analysis & Material Takeoffs",
+    bio: "Ivonne develops comprehensive, transparent proposals and estimates tailored to each project's scope. She works closely with clients to guide them through budgeting, material selections, and schedule milestones.",
+    image: "/user_female.png",
+    icon: Calculator
+  },
+  {
+    name: "Apolonio Salcedo",
+    role: "Project Design & Technical Takeoffs",
+    specialty: "Digital Site Layouts & Specifications",
+    bio: "Apolonio translates architectural requirements into actionable field plans. He leverages digital modeling, grade calculations, and automated takeoff workflows to guarantee structural accuracy before breaking ground.",
+    image: "/apolonio.png",
+    icon: Compass
+  }
+];
+
 const initials = (name: string) => name.split(" ").map((n) => n[0]).join("");
+
+function TeamAvatar({ name, image }: { name: string; image?: string }) {
+  const [imageError, setImageError] = useState(false);
+
+  if (!image || imageError) {
+    return (
+      <div className="relative mb-4 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-4 border-slate-50 bg-brand text-2xl font-bold text-white shadow-inner">
+        {initials(name)}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative mb-4 h-20 w-20 shrink-0 overflow-hidden rounded-full border-4 border-slate-50 bg-slate-100 shadow-inner">
+      <Image 
+        src={image} 
+        alt={name} 
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
+        onError={() => setImageError(true)}
+      />
+    </div>
+  );
+}
 
 export default function Leadership() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Animación al hacer scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -47,7 +90,7 @@ export default function Leadership() {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -61,7 +104,7 @@ export default function Leadership() {
     <section ref={sectionRef} id="about" className="bg-slate-900 py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Encabezado de la sección en modo oscuro */}
+        {/* ENCABEZADO PRINCIPAL */}
         <div 
           className={`flex flex-col items-center text-center transition-all duration-1000 transform ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
@@ -77,36 +120,21 @@ export default function Leadership() {
           </p>
         </div>
 
-        {/* Cuadrícula adaptada a 4 columnas en pantallas grandes (lg:grid-cols-4) */}
-        <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((member, index) => (
+        {/* 1. CUADRÍCULA DIRECTIVA (4 COLUMNAS) */}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {leadershipTeam.map((member, index) => (
             <article 
-              key={member.name} 
+              key={`leader-${member.name}-${index}`} 
               style={{ transitionDelay: `${index * 150}ms` }}
               className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-1000 hover:-translate-y-2 hover:shadow-2xl ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
               }`}
             >
-              {/* Barra superior azul */}
               <div className="h-2 w-full bg-brand transition-colors duration-300 group-hover:bg-blue-400" />
               
               <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <div className="flex flex-col items-center text-center">
-                  {/* Avatar con soporte para imagen o iniciales */}
-                  <div className="relative mb-4 flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-slate-50 bg-brand shadow-inner">
-                    <div className="absolute inset-0 z-10 flex items-center justify-center text-2xl font-bold text-white">
-                      {initials(member.name)}
-                    </div>
-                    {member.image && (
-                      <Image 
-                        src={member.image} 
-                        alt={member.name} 
-                        fill
-                        className="relative z-20 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    )}
-                  </div>
-                  
+                  <TeamAvatar name={member.name} image={member.image} />
                   <h4 className="text-lg font-bold text-slate-900 leading-snug">{member.name}</h4>
                   <p className="mt-1 text-sm font-semibold text-brand">{member.role}</p>
                 </div>
@@ -115,7 +143,6 @@ export default function Leadership() {
                   {member.bio}
                 </p>
 
-                {/* Enlaces de contacto */}
                 <div className="mt-6 flex justify-center gap-4 border-t border-slate-100 pt-5">
                   <a href="#" className="text-slate-400 transition-colors hover:text-brand" aria-label={`LinkedIn de ${member.name}`}>
                     <Linkedin size={20} />
@@ -127,6 +154,53 @@ export default function Leadership() {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* 2. SUBSECCIÓN: PROJECT DESIGN & ESTIMATING */}
+        <div className="mt-28 border-t border-slate-800 pt-20">
+          <div className="flex flex-col items-center text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 border border-blue-500/20">
+              Precision Takeoffs & Cost Certainty
+            </span>
+            <h4 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Project Design & Estimating
+            </h4>
+            <p className="mt-4 max-w-2xl text-base text-slate-400">
+              Clear blueprints and accurate calculations are the foundation of on-time, on-budget delivery. Our dedicated team reviews site layouts, material quantities, and specifications to ensure thorough and reliable estimates.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+            {designEstimatingTeam.map((member, index) => {
+              const Icon = member.icon;
+              return (
+                <div 
+                  key={`estimator-${member.name}-${index}`}
+                  className="group relative flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-2xl border border-slate-800 bg-slate-800/50 p-6 sm:p-8 backdrop-blur-sm transition-all duration-300 hover:border-brand hover:bg-slate-800"
+                >
+                  <div className="relative shrink-0">
+                    <TeamAvatar name={member.name} image={member.image} />
+                    <div className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-brand text-white shadow-md">
+                      <Icon size={14} />
+                    </div>
+                  </div>
+
+                  <div className="flex-1 text-center sm:text-left">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <h5 className="text-xl font-bold text-white">{member.name}</h5>
+                    </div>
+                    <p className="text-sm font-semibold text-blue-400 mt-0.5">{member.role}</p>
+                    <span className="inline-block mt-2 rounded bg-slate-700/60 px-2.5 py-1 text-xs font-medium text-slate-300">
+                      {member.specialty}
+                    </span>
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                      {member.bio}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
       </div>
