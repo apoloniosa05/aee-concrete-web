@@ -42,13 +42,13 @@ export default function Header() {
         }`}
       >
         
-        {/* LOGO + TEXTO CORPORATIVO UNIFORME (Izquierda) */}
+        {/* LOGO + TEXTO CORPORATIVO (Izquierda) */}
         <div className="flex shrink-0 items-center z-10">
           <a 
             href="#home" 
             className="group flex items-center gap-3 sm:gap-3.5 transition-all duration-300 active:scale-95"
           >
-            {/* Imagen del Logo (Isotipo de la retroexcavadora) */}
+            {/* Imagen del Logo (Isotipo de la excavadora) */}
             <div className={`relative shrink-0 transition-all duration-500 ease-in-out ${
               isScrolled ? "h-10 w-12 sm:h-11 sm:w-14" : "h-14 w-14 sm:h-16 sm:w-18"
             }`}>
@@ -61,17 +61,17 @@ export default function Header() {
               />
             </div>
 
-            {/* Texto Uniforme y del Mismo Color (Azul Corporativo) */}
+            {/* Texto Uniforme y del Mismo Color */}
             <div className="flex flex-col justify-center">
               <span className={`font-black tracking-tight text-brand leading-none transition-all duration-500 ease-in-out ${
                 isScrolled ? "text-lg sm:text-xl" : "text-xl sm:text-2xl lg:text-[26px]"
               }`}>
                 AEE CONCRETE
               </span>
-              <span className={`font-bold tracking-[0.18em] text-brand leading-none mt-1 transition-all duration-500 ease-in-out ${
-                isScrolled ? "text-[10px] sm:text-[11px]" : "text-xs sm:text-[13px]"
+              <span className={`font-bold tracking-[0.12em] text-brand leading-none mt-1 transition-all duration-500 ease-in-out ${
+                isScrolled ? "text-[9px] sm:text-[10px]" : "text-[11px] sm:text-xs"
               }`}>
-                & EXCAVATIONS
+                & EXCAVATION • DRILLING
               </span>
             </div>
           </a>
@@ -99,7 +99,7 @@ export default function Header() {
             href="#contact" 
             className="text-base font-bold text-gray-800 transition-colors hover:text-brand active:scale-95 whitespace-nowrap"
           >
-            (916) 340-4542
+            (916) 555-0198
           </a>
           <a 
             href="#contact" 
@@ -147,7 +147,7 @@ export default function Header() {
                 onClick={() => setOpen(false)} 
                 className="block py-3 text-lg font-bold text-brand active:scale-95 transition-transform"
               >
-                Call: (916) 340-4542
+                Call: (916) 555-0198
               </a>
             </li>
           </ul>

@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react";
 import { BrickWall, Shovel, Building2, Home, ArrowRight, X, CheckCircle2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-// Datos actualizados sin clases asimétricas
 const services: { 
   id: string;
   title: string; 
@@ -22,16 +21,28 @@ const services: {
     body: "Foundations, slabs, retaining walls, driveways, and decorative finishes. We pour structural concrete built to carry the load.",
     image: "/concrete.jpg",
     modalDetails: "Our concrete division handles everything from complex commercial foundations to residential decorative patios. We ensure structural integrity, proper curing, and aesthetic perfection for every pour.",
-    features: ["Structural Foundations", "Retaining Walls", "Decorative & Stamped Concrete", "Driveways & Sidewalks", "Slab on Grade"],
+    features: [
+      "Structural Foundations & Slabs", 
+      "Retaining Walls & Parapets", 
+      "Decorative & Stamped Concrete", 
+      "Commercial Driveways & Curbs", 
+      "Seismic Retrofitting & Tie-Ins"
+    ],
   },
   {
-    id: "excavations",
-    title: "Excavations",
+    id: "excavation-drilling",
+    title: "Excavation & Drilling",
     icon: Shovel,
-    body: "Site preparation, grading, trenching, and earthwork. Our heavy machinery operators get your site cleared and ready.",
+    body: "Site preparation, foundation pier drilling, trenching, and grading. Precision earthwork and heavy drilling equipment ready for any site.",
     image: "/excavation.jpg",
-    modalDetails: "Before any construction begins, the ground must be perfectly prepped. Our fleet of excavators and heavy machinery is operated by veterans who guarantee precision, safety, and efficiency.",
-    features: ["Site Clearing & Prep", "Trenching for Utilities", "Grading & Leveling", "Earth Removal", "Demolition Support"],
+    modalDetails: "From rough terrain grading to precision pier and caisson drilling, our heavy equipment team prepares your site to exact engineering specifications. We ensure safe, efficient, and laser-guided ground operations.",
+    features: [
+      "Foundation Pier & Caisson Drilling", 
+      "Mass Earthmoving & Rough Grading", 
+      "Utility Trenching & Pipeline Excavation", 
+      "Drilled Retaining Wall Post Holes", 
+      "Laser-Guided Compaction & Leveling"
+    ],
   },
 ];
 
@@ -64,7 +75,9 @@ export default function Services() {
     } else {
       document.body.style.overflow = "auto";
     }
-    return () => { document.body.style.overflow = "auto"; };
+    return () => { 
+      document.body.style.overflow = "auto"; 
+    };
   }, [activeModal]);
 
   return (
@@ -80,11 +93,11 @@ export default function Services() {
             <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">What We Do</h2>
             <div className="mt-4 h-1.5 w-24 rounded-full bg-brand" />
             <p className="mt-4 max-w-2xl text-lg text-gray-600">
-              Delivering rock-solid results from the ground up with top-tier equipment and unmatched expertise.
+              Delivering rock-solid results from the ground up with top-tier equipment, precision drilling, and unmatched expertise.
             </p>
           </div>
 
-          {/* CUADRÍCULA UNIFORME: Cambiamos a md:grid-cols-2 para que ambas ocupen 50% y 50% */}
+          {/* CUADRÍCULA UNIFORME */}
           <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10">
             {services.map((service, index) => {
               const Icon = service.icon;
@@ -93,7 +106,6 @@ export default function Services() {
                   key={service.id} 
                   onClick={() => setActiveModal(service)}
                   style={{ transitionDelay: `${index * 200}ms` }}
-                  // Eliminamos las clases de span, ahora son naturalmente iguales
                   className={`group relative flex min-h-[450px] cursor-pointer flex-col justify-end overflow-hidden rounded-3xl shadow-lg transition-all duration-1000 hover:shadow-2xl ${
                     isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
                   }`}
@@ -128,8 +140,9 @@ export default function Services() {
             })}
           </div>
 
+          {/* BANNER INFORMATIVO */}
           <div 
-            style={{ transitionDelay: "600ms" }}
+            style={{ transitionDelay: "400ms" }}
             className={`mt-16 flex flex-col items-center justify-between gap-6 rounded-2xl bg-brand px-8 py-8 shadow-xl md:flex-row lg:px-12 transition-all duration-1000 transform ${
               isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             }`}
