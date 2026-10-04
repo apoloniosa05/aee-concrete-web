@@ -99,7 +99,7 @@ export default function Header() {
             href="#contact" 
             className="text-base font-bold text-gray-800 transition-colors hover:text-brand active:scale-95 whitespace-nowrap"
           >
-            (916) 555-0198
+            (916) 340-4542
           </a>
           <a 
             href="#contact" 
@@ -147,7 +147,7 @@ export default function Header() {
                 onClick={() => setOpen(false)} 
                 className="block py-3 text-lg font-bold text-brand active:scale-95 transition-transform"
               >
-                Call: (916) 555-0198
+                Call: (916) 340-4542
               </a>
             </li>
           </ul>
