@@ -59,19 +59,19 @@ function TeamAvatar({ name, image }: { name: string; image?: string }) {
 
   if (!image || imageError) {
     return (
-      <div className="relative mb-4 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-4 border-slate-50 bg-brand text-2xl font-bold text-white shadow-inner">
+      <div className="relative mb-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-black/5 ring-4 ring-slate-100 bg-brand text-2xl font-bold tracking-tight text-white shadow-inner">
         {initials(name)}
       </div>
     );
   }
 
   return (
-    <div className="relative mb-4 h-20 w-20 shrink-0 overflow-hidden rounded-full border-4 border-slate-50 bg-slate-100 shadow-inner">
+    <div className="relative mb-5 h-20 w-20 shrink-0 overflow-hidden rounded-full border border-black/5 ring-4 ring-slate-100 bg-slate-100 shadow-inner">
       <Image 
         src={image} 
         alt={name} 
         fill
-        className="object-cover transition-transform duration-500 group-hover:scale-110"
+        className="object-cover transition-transform duration-300 group-hover:scale-110"
         onError={() => setImageError(true)}
       />
     </div>
@@ -101,8 +101,8 @@ export default function Leadership() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="bg-slate-900 py-20 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="about" className="bg-slate-900 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         
         {/* ENCABEZADO PRINCIPAL */}
         <div 
@@ -110,10 +110,10 @@ export default function Leadership() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
         >
-          <h2 className="text-sm font-bold uppercase tracking-widest text-blue-400">Our Leadership</h2>
-          <h3 className="mt-2 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Backed by Experience</h3>
-          <div className="mt-6 h-1 w-20 rounded-full bg-brand" />
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
+          <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">Our Leadership</h2>
+          <h3 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Backed by Experience</h3>
+          <div className="mt-6 h-1.5 w-20 rounded-full bg-brand" />
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-400">
             For over 16 years, our family-run team has built and prepared job sites across North California. 
             We stand behind every project with quality workmanship, safe practices, and clear communication 
             from the first estimate to the final pour.
@@ -121,34 +121,34 @@ export default function Leadership() {
         </div>
 
         {/* 1. CUADRÍCULA DIRECTIVA (4 COLUMNAS) */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {leadershipTeam.map((member, index) => (
             <article 
               key={`leader-${member.name}-${index}`} 
               style={{ transitionDelay: `${index * 150}ms` }}
-              className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-1000 hover:-translate-y-2 hover:shadow-2xl ${
+              className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/95 backdrop-blur-md shadow-[0_12px_36px_rgb(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_rgb(0,0,0,0.35)] ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
               }`}
             >
-              <div className="h-2 w-full bg-brand transition-colors duration-300 group-hover:bg-blue-400" />
+              <div className="h-1.5 w-full bg-brand transition-colors duration-300 group-hover:bg-blue-500" />
               
-              <div className="flex flex-1 flex-col p-6 sm:p-7">
+              <div className="flex flex-1 flex-col p-7 sm:p-8">
                 <div className="flex flex-col items-center text-center">
                   <TeamAvatar name={member.name} image={member.image} />
-                  <h4 className="text-lg font-bold text-slate-900 leading-snug">{member.name}</h4>
-                  <p className="mt-1 text-sm font-semibold text-brand">{member.role}</p>
+                  <h4 className="text-lg font-bold tracking-tight text-slate-900 leading-snug">{member.name}</h4>
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-brand">{member.role}</p>
                 </div>
 
-                <p className="mt-5 flex-1 text-sm leading-relaxed text-slate-600 text-center">
+                <p className="mt-5 flex-1 text-sm leading-relaxed text-slate-500 text-center">
                   {member.bio}
                 </p>
 
-                <div className="mt-6 flex justify-center gap-4 border-t border-slate-100 pt-5">
-                  <a href="#" className="text-slate-400 transition-colors hover:text-brand" aria-label={`LinkedIn de ${member.name}`}>
-                    <Linkedin size={20} />
+                <div className="mt-7 flex justify-center gap-4 border-t border-black/5 pt-5">
+                  <a href="#" className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-100 hover:text-brand" aria-label={`LinkedIn de ${member.name}`}>
+                    <Linkedin size={19} />
                   </a>
-                  <a href="#" className="text-slate-400 transition-colors hover:text-brand" aria-label={`Email a ${member.name}`}>
-                    <Mail size={20} />
+                  <a href="#" className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-100 hover:text-brand" aria-label={`Email a ${member.name}`}>
+                    <Mail size={19} />
                   </a>
                 </div>
               </div>
@@ -157,44 +157,44 @@ export default function Leadership() {
         </div>
 
         {/* 2. SUBSECCIÓN: PROJECT DESIGN & ESTIMATING */}
-        <div className="mt-28 border-t border-slate-800 pt-20">
+        <div className="mt-32 border-t border-white/10 pt-24">
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 border border-blue-500/20">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 backdrop-blur-md">
               Precision Takeoffs & Cost Certainty
             </span>
-            <h4 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <h4 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Project Design & Estimating
             </h4>
             {/* Párrafo descriptivo breve */}
-            <p className="mt-3 max-w-xl text-base text-slate-400">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-400">
               Accurate planning and clear estimates to keep your project on schedule and on budget.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+          <div className="mt-16 grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {designEstimatingTeam.map((member, index) => {
               const Icon = member.icon;
               return (
                 <div 
                   key={`estimator-${member.name}-${index}`}
-                  className="group relative flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-2xl border border-slate-800 bg-slate-800/50 p-6 sm:p-8 backdrop-blur-sm transition-all duration-300 hover:border-brand hover:bg-slate-800"
+                  className="group relative flex flex-col sm:flex-row items-center sm:items-start gap-6 rounded-3xl border border-white/10 bg-white/[0.04] p-8 sm:p-9 backdrop-blur-md shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] hover:shadow-2xl"
                 >
                   <div className="relative shrink-0">
                     <TeamAvatar name={member.name} image={member.image} />
-                    <div className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-brand text-white shadow-md">
+                    <div className="absolute -bottom-0.5 -right-0.5 flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-brand text-white shadow-md">
                       <Icon size={14} />
                     </div>
                   </div>
 
                   <div className="flex-1 text-center sm:text-left">
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                      <h5 className="text-xl font-bold text-white">{member.name}</h5>
+                      <h5 className="text-xl font-bold tracking-tight text-white">{member.name}</h5>
                     </div>
-                    <p className="text-sm font-semibold text-blue-400 mt-0.5">{member.role}</p>
-                    <span className="inline-block mt-2 rounded bg-slate-700/60 px-2.5 py-1 text-xs font-medium text-slate-300">
+                    <p className="text-sm font-semibold text-blue-400 mt-1">{member.role}</p>
+                    <span className="inline-block mt-2.5 rounded-md border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-neutral-300 backdrop-blur-sm">
                       {member.specialty}
                     </span>
-                    <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                    <p className="mt-4 text-sm leading-relaxed text-slate-400">
                       {member.bio}
                     </p>
                   </div>
