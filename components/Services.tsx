@@ -70,13 +70,19 @@ export default function Services() {
   }, []);
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveModal(null);
+    };
+
     if (activeModal) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "auto";
     }
     return () => { 
       document.body.style.overflow = "auto"; 
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeModal]);
 
@@ -90,7 +96,8 @@ export default function Services() {
               isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             }`}
           >
-            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">What We Do</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand">Core Capabilities</span>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">What We Do</h2>
             <div className="mt-5 h-1.5 w-20 rounded-full bg-brand" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-500">
               Delivering rock-solid results from the ground up with top-tier equipment, precision drilling, and unmatched expertise.
@@ -106,7 +113,7 @@ export default function Services() {
                   key={service.id} 
                   onClick={() => setActiveModal(service)}
                   style={{ transitionDelay: `${index * 200}ms` }}
-                  className={`group relative flex min-h-[480px] cursor-pointer flex-col justify-end overflow-hidden rounded-3xl border border-black/5 ring-1 ring-inset ring-white/10 shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgb(11,61,145,0.18)] ${
+                  className={`group relative flex min-h-[500px] cursor-pointer flex-col justify-end overflow-hidden rounded-3xl border border-black/5 ring-1 ring-inset ring-white/10 shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgb(11,61,145,0.18)] ${
                     isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
                   }`}
                 >
@@ -118,21 +125,38 @@ export default function Services() {
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/55 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/10 transition-opacity duration-300 group-hover:opacity-95" />
 
                   <div className="relative z-10 flex flex-col p-8 sm:p-10 transition-transform duration-300 ease-out group-hover:-translate-y-1">
-                    <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-brand/90 text-white shadow-lg shadow-brand/30 backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-brand">
-                      <Icon size={28} aria-hidden />
+                    <div className="mb-6 flex items-center justify-between">
+                      <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-brand/90 text-white shadow-lg shadow-brand/30 backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-brand">
+                        <Icon size={28} aria-hidden />
+                      </div>
+                      <span className="rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-xs font-semibold tracking-wide text-white/90 backdrop-blur-md">
+                        {service.features.length} Key Specialties
+                      </span>
                     </div>
                     
                     <h3 className="text-3xl font-bold tracking-tight text-white">{service.title}</h3>
-                    <p className="mt-3 line-clamp-2 leading-relaxed text-neutral-300">
+                    <p className="mt-3 leading-relaxed text-neutral-300">
                       {service.body}
                     </p>
 
-                    <div className="mt-6 flex h-0 items-center gap-2 overflow-hidden text-brand-light opacity-0 transition-all duration-300 group-hover:h-6 group-hover:opacity-100">
-                      <span className="text-sm font-semibold tracking-tight text-blue-300">View Details</span>
-                      <ArrowRight size={18} className="text-blue-300 transition-transform duration-200 group-hover:translate-x-1" />
+                    {/* Vista previa rápida de especialidades */}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {service.features.slice(0, 3).map((feat) => (
+                        <span
+                          key={feat}
+                          className="rounded-lg border border-white/10 bg-white/[0.07] px-3 py-1 text-xs font-medium text-neutral-200 backdrop-blur-sm"
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-7 inline-flex items-center gap-2 border-t border-white/10 pt-5 text-sm font-semibold tracking-tight text-blue-300 transition-colors duration-200 group-hover:text-white">
+                      <span>View Technical Specifications</span>
+                      <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1.5" />
                     </div>
                   </div>
                 </article>
@@ -143,7 +167,7 @@ export default function Services() {
           {/* BANNER INFORMATIVO */}
           <div 
             style={{ transitionDelay: "400ms" }}
-            className={`mt-20 flex flex-col items-center justify-between gap-8 rounded-3xl border border-white/10 bg-brand px-8 py-10 shadow-2xl shadow-brand/20 md:flex-row lg:px-12 transition-all duration-1000 transform ${
+            className={`mt-20 flex flex-col items-center justify-between gap-8 rounded-3xl border border-white/10 bg-gradient-to-r from-brand via-brand to-brand-dark px-8 py-10 shadow-2xl shadow-brand/20 md:flex-row lg:px-12 transition-all duration-1000 transform ${
               isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             }`}
           >
@@ -154,15 +178,16 @@ export default function Services() {
                 <Home size={30} />
               </div>
               <div>
-                <h4 className="text-2xl font-bold tracking-tight text-white">Commercial & Residential</h4>
+                <h4 className="text-2xl font-bold tracking-tight text-white">Commercial &amp; Residential</h4>
                 <p className="mt-1.5 text-base text-blue-100/85">One crew, one standard of work, whatever the size of the job.</p>
               </div>
             </div>
             <a 
               href="#contact" 
-              className="whitespace-nowrap rounded-xl border border-black/5 bg-white px-8 py-4 font-semibold tracking-tight text-brand shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow-xl active:scale-95"
+              className="group inline-flex items-center gap-2 whitespace-nowrap rounded-xl border border-black/5 bg-white px-8 py-4 font-semibold tracking-tight text-brand shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow-xl active:scale-95"
             >
-              Work with us
+              <span>Work with us</span>
+              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
             </a>
           </div>
 
@@ -171,7 +196,12 @@ export default function Services() {
 
       {/* MODAL INTERACTIVO */}
       {activeModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-service-title"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+        >
           <div 
             className="absolute inset-0 bg-slate-950/75 backdrop-blur-md transition-opacity"
             onClick={() => setActiveModal(null)}
@@ -181,6 +211,7 @@ export default function Services() {
             
             <button 
               onClick={() => setActiveModal(null)}
+              aria-label="Close modal"
               className="absolute right-5 top-5 z-20 rounded-full border border-white/15 bg-black/40 p-2.5 text-white backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/65 hover:shadow-lg active:scale-95"
             >
               <X size={20} />
@@ -198,7 +229,9 @@ export default function Services() {
                 <div className="flex h-13 w-13 items-center justify-center rounded-xl border border-white/15 bg-brand p-3 text-white shadow-lg backdrop-blur-md">
                   <activeModal.icon size={26} />
                 </div>
-                <h3 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{activeModal.title} Services</h3>
+                <h3 id="modal-service-title" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  {activeModal.title} Services
+                </h3>
               </div>
             </div>
 
@@ -217,11 +250,18 @@ export default function Services() {
                 ))}
               </ul>
 
-              <div className="mt-10 border-t border-black/5 pt-8 text-right">
+              <div className="mt-10 flex flex-col-reverse items-center justify-between gap-4 border-t border-black/5 pt-8 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => setActiveModal(null)}
+                  className="w-full sm:w-auto rounded-xl border border-black/10 px-6 py-3.5 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-100"
+                >
+                  Close Window
+                </button>
                 <a 
                   href="#contact" 
                   onClick={() => setActiveModal(null)}
-                  className="inline-flex items-center gap-2.5 rounded-xl border border-white/10 bg-brand px-7 py-3.5 font-semibold tracking-tight text-white shadow-md shadow-brand/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/30 active:scale-95"
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-white/10 bg-brand px-7 py-3.5 font-semibold tracking-tight text-white shadow-md shadow-brand/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/30 active:scale-95"
                 >
                   Request a Quote
                   <ArrowRight size={18} />

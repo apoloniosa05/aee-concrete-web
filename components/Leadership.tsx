@@ -52,21 +52,28 @@ const designEstimatingTeam = [
   }
 ];
 
-const initials = (name: string) => name.split(" ").map((n) => n[0]).join("");
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .filter((part) => !part.includes("."))
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join("");
 
 function TeamAvatar({ name, image }: { name: string; image?: string }) {
   const [imageError, setImageError] = useState(false);
+  const isStockPlaceholder = !image || image.includes("/user.jpg") || image.includes("/user_female.png");
 
-  if (!image || imageError) {
+  if (isStockPlaceholder || imageError) {
     return (
-      <div className="relative mb-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-black/5 ring-4 ring-slate-100 bg-brand text-2xl font-bold tracking-tight text-white shadow-inner">
+      <div className="relative mb-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-white/20 ring-4 ring-brand/15 bg-gradient-to-br from-brand via-blue-800 to-slate-900 text-xl font-extrabold tracking-wider text-white shadow-lg transition-transform duration-300 group-hover:scale-105">
         {initials(name)}
       </div>
     );
   }
 
   return (
-    <div className="relative mb-5 h-20 w-20 shrink-0 overflow-hidden rounded-full border border-black/5 ring-4 ring-slate-100 bg-slate-100 shadow-inner">
+    <div className="relative mb-5 h-20 w-20 shrink-0 overflow-hidden rounded-full border border-black/5 ring-4 ring-brand/15 bg-slate-100 shadow-md">
       <Image 
         src={image} 
         alt={name} 
@@ -101,8 +108,11 @@ export default function Leadership() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="bg-slate-900 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+    <section ref={sectionRef} id="about" className="relative bg-slate-900 py-24 sm:py-32 overflow-hidden">
+      {/* Resplandor ambiental sutil */}
+      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 h-96 w-[42rem] rounded-full bg-brand/15 blur-[140px]" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         
         {/* ENCABEZADO PRINCIPAL */}
         <div 
@@ -143,12 +153,20 @@ export default function Leadership() {
                   {member.bio}
                 </p>
 
-                <div className="mt-7 flex justify-center gap-4 border-t border-black/5 pt-5">
-                  <a href="#" className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-100 hover:text-brand" aria-label={`LinkedIn de ${member.name}`}>
-                    <Linkedin size={19} />
+                <div className="mt-7 flex justify-center gap-3 border-t border-black/5 pt-5">
+                  <a
+                    href="#contact"
+                    className="rounded-lg border border-black/5 bg-slate-50 p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/20 hover:bg-brand/5 hover:text-brand"
+                    aria-label={`LinkedIn de ${member.name}`}
+                  >
+                    <Linkedin size={18} />
                   </a>
-                  <a href="#" className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-100 hover:text-brand" aria-label={`Email a ${member.name}`}>
-                    <Mail size={19} />
+                  <a
+                    href="mailto:info@aeeconcrete.com"
+                    className="rounded-lg border border-black/5 bg-slate-50 p-2 text-slate-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/20 hover:bg-brand/5 hover:text-brand"
+                    aria-label={`Email a ${member.name}`}
+                  >
+                    <Mail size={18} />
                   </a>
                 </div>
               </div>
@@ -160,10 +178,10 @@ export default function Leadership() {
         <div className="mt-32 border-t border-white/10 pt-24">
           <div className="flex flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 backdrop-blur-md">
-              Precision Takeoffs & Cost Certainty
+              Precision Takeoffs &amp; Cost Certainty
             </span>
             <h4 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Project Design & Estimating
+              Project Design &amp; Estimating
             </h4>
             {/* Párrafo descriptivo breve */}
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-400">

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Facebook, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,7 +10,38 @@ export default function Footer() {
       {/* Efecto de luz de fondo sutil en la esquina del footer */}
       <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-brand/10 blur-[130px] pointer-events-none" aria-hidden="true" />
 
-      <div className="mx-auto grid max-w-7xl gap-12 lg:gap-16 px-6 py-24 sm:px-8 md:grid-cols-12 lg:px-10 relative z-10">
+      {/* Franja Pre-Footer de Conversión Rápida */}
+      <div className="relative z-10 border-b border-white/10 bg-white/[0.02] backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-12 sm:px-8 md:flex-row md:items-center lg:px-10">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">Start Your Project</span>
+            <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+              Ready to break ground in Northern California?
+            </h3>
+            <p className="mt-1.5 text-sm sm:text-base text-slate-400">
+              Speak directly with our estimating and field operations team for a transparent project quote.
+            </p>
+          </div>
+          <div className="flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row">
+            <a
+              href="tel:+19163404542"
+              className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/[0.06] px-6 py-3.5 text-sm font-semibold tracking-tight text-white backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-lg"
+            >
+              <Phone size={17} className="text-blue-400" />
+              <span>(916) 340-4542</span>
+            </a>
+            <a
+              href="mailto:info@aeeconcrete.com?subject=Project%20Estimate%20Request"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-brand px-6 py-3.5 text-sm font-semibold tracking-tight text-white shadow-lg shadow-brand/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-xl hover:shadow-brand/35"
+            >
+              <span>Email Project Plans</span>
+              <ArrowUpRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto grid max-w-7xl gap-12 lg:gap-16 px-6 py-20 sm:px-8 md:grid-cols-12 lg:px-10 relative z-10">
         
         {/* Columna 1: Emblema de Marca e Información General */}
         <div className="md:col-span-4 space-y-8">
@@ -39,13 +70,13 @@ export default function Footer() {
           
           {/* Redes Sociales Corporativas */}
           <div className="flex gap-4 pt-2">
-            <a href="#" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="Facebook">
+            <a href="#contact" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="Facebook">
               <Facebook size={18} />
             </a>
-            <a href="#" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="Instagram">
+            <a href="#contact" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="Instagram">
               <Instagram size={18} />
             </a>
-            <a href="#" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="LinkedIn">
+            <a href="#contact" className="rounded-full bg-white/[0.03] border border-white/10 p-3 text-slate-400 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:border-brand hover:shadow-lg hover:shadow-brand/25" aria-label="LinkedIn">
               <Linkedin size={18} />
             </a>
           </div>
@@ -53,7 +84,7 @@ export default function Footer() {
 
         {/* Columna 2: Detalles de Contacto y Oficina */}
         <div className="md:col-span-4 space-y-6">
-          <h4 className="text-lg font-bold text-white tracking-tight">Contact & Office</h4>
+          <h4 className="text-lg font-bold text-white tracking-tight">Contact &amp; Office</h4>
           <ul className="space-y-4 text-sm text-slate-400">
             <li className="group flex items-start gap-4 transition-all duration-200 hover:translate-x-0.5 hover:text-slate-200">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-md transition-all duration-200 group-hover:border-brand/40 group-hover:bg-brand/20">
@@ -69,7 +100,9 @@ export default function Footer() {
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-md transition-all duration-200 group-hover:border-brand/40 group-hover:bg-brand/20">
                 <Phone className="shrink-0 text-blue-400" size={18} />
               </div>
-              <span className="font-semibold text-slate-300 group-hover:text-white transition-colors duration-200">(916) 340-4542</span>
+              <a href="tel:+19163404542" className="font-semibold text-slate-300 hover:text-blue-400 transition-colors duration-200">
+                (916) 340-4542
+              </a>
             </li>
             <li className="group flex items-center gap-4 transition-all duration-200 hover:translate-x-0.5 hover:text-slate-200">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-md transition-all duration-200 group-hover:border-brand/40 group-hover:bg-brand/20">
@@ -115,8 +148,8 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 sm:px-8 md:flex-row lg:px-10">
           <p>© {new Date().getFullYear()} AEE Concrete and Excavation LLC. All rights reserved.</p>
           <div className="flex gap-8 font-medium">
-            <a href="#" className="transition-all duration-200 hover:-translate-y-0.5 hover:text-white">Privacy Policy</a>
-            <a href="#" className="transition-all duration-200 hover:-translate-y-0.5 hover:text-white">Terms of Service</a>
+            <a href="#contact" className="transition-all duration-200 hover:-translate-y-0.5 hover:text-white">Privacy Policy</a>
+            <a href="#contact" className="transition-all duration-200 hover:-translate-y-0.5 hover:text-white">Terms of Service</a>
           </div>
         </div>
       </div>
