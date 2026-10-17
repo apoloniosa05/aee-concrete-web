@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Clock, Facebook, Linkedin, Instagram, ArrowUpRight
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-slate-950 text-slate-300 relative overflow-hidden border-t border-white/10">
+    <footer className="bg-slate-950 text-slate-300 relative overflow-hidden border-t border-white/10">
       
       {/* Efecto de luz de fondo sutil en la esquina del footer */}
       <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-brand/10 blur-[130px] pointer-events-none" aria-hidden="true" />
